@@ -12,7 +12,7 @@ import requests
 
 
 # 載入 .env 檔案
-env_path = r"F:\RickHSIAO\Python\My Project\.env"
+env_path = r"F:\RickHSIAO\Python\My Project\日記情緒分析\.env"
 load_dotenv(env_path, override=True)
 
 # ── 設定區 ──────────────────────────────────────────────
