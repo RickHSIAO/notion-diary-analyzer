@@ -170,8 +170,15 @@ def analyze_emotion(diary_text: str) -> dict:
 - 0~3 ：非常低落、悲傷、憤怒、或發生很糟糕的事
 """
 
-    # 依序嘗試，若配額耗盡則自動換下一個模型（優先用有配額的 2.5-flash）
-    models_to_try = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.0-flash-lite"]
+    # 依序嘗試，若配額耗盡則自動換下一個模型（優先用最新、品質最佳的模型）
+    models_to_try = [
+        "gemini-2.5-flash",       # 最佳品質，5 RPM / 250K TPM / 20 RPD
+        "gemini-3.1-flash-lite",  # 最高 RPM，15 RPM / 250K TPM / 500 RPD
+        "gemini-3.0-flash",       # 5 RPM / 250K TPM / 20 RPD
+        "gemini-2.5-flash-lite",  # 10 RPM / 250K TPM / 20 RPD
+        "gemini-2.0-flash",       # 上一代，0 RPM（付費帳戶用）
+        "gemini-2.0-flash-lite",  # 上一代輕量版
+    ]
     last_error = None
 
     for model_name in models_to_try:
